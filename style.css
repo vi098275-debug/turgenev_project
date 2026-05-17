@@ -1,0 +1,273 @@
+/* --- ПЕРЕМЕННЫЕ И ОСНОВА --- */
+:root {
+    --text-color: #2c342e;
+    --dark-green: #3a4d39;
+    --gold: #c5a059;
+    --glass: rgba(255, 255, 255, 0.35);
+    --paper-bg: #eaddca;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lora', serif;
+    background-color: var(--paper-bg);
+    /* Текстура папируса + мягкий радиальный свет */
+    background-image: 
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.05) 100%),
+        url('https://i.pinimg.com/originals/9b/8d/4d/9b8d4d4394b876430de47c191ee2f7c8.jpg');
+    background-attachment: fixed;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* --- АНИМИРОВАННЫЙ ТУМАН НА ФОНЕ --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 60%);
+    animation: mistMove 25s infinite linear;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes mistMove {
+    from { transform: translateX(-25%) translateY(-5%); }
+    to { transform: translateX(5%) translateY(5%); }
+}
+
+/* --- ШАПКА САЙТА (ХЕДЕР) --- */
+.main-header {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    /* Твоя основная картинка леса с Яндекса */
+    background: url('https://i.pinimg.com/originals/e9/74/eb/e974ebb594996130e014f4952aae7ac0.jpg?nii=t') center/cover no-repeat fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* Бесшовный переход (Туманный градиент) */
+.main-header::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(to bottom, transparent 0%, rgba(234, 221, 202, 0.7) 40%, var(--paper-bg) 100%);
+    z-index: 3;
+}
+
+.header-overlay {
+    z-index: 4;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 60px 80px;
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.header-overlay h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    margin: 0;
+    text-shadow: 2px 4px 20px rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+}
+
+.header-overlay p {
+    font-size: 1.4rem;
+    margin-top: 15px;
+    font-style: italic;
+    opacity: 0.9;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.4);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- НАВИГАЦИЯ (СТЕКЛЯННАЯ КАПСУЛА) --- */
+.navbar {
+    position: sticky;
+    top: 20px;
+    margin: -50px auto 60px; /* Наплыв на хедер */
+    width: fit-content;
+    padding: 12px 45px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    display: flex;
+    gap: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--dark-green);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar a:hover {
+    color: var(--gold);
+    transform: translateY(-3px);
+}
+
+/* --- КОНТЕНТНЫЕ ПЛАЖКИ (ОБЪЕМНОЕ СТЕКЛО) --- */
+.content {
+    max-width: 1100px;
+    margin: 0 auto 100px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Базовое состояние для анимации самопоявления */
+.glass-card {
+    display: flex;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 45px;
+    margin-bottom: 80px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.05),
+        0 40px 80px rgba(0, 0, 0, 0.1);
+    
+    /* Анимация появления */
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
+    filter: blur(10px);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-card.reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.glass-card.reverse {
+    flex-direction: row-reverse;
+}
+
+/* ТЕКСТОВАЯ СТОРОНА С ГЛУБИНОЙ */
+.text-side {
+    flex: 1.2;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+
+.text-side h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    color: var(--dark-green);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+}
+
+.text-side h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+.text-side p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #344335;
+    text-align: justify;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* ВИЗУАЛЬНАЯ СТОРОНА (КАРТИНКИ) */
+.image-side {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 500px;
+    transition: transform 0.8s ease;
+}
+
+/* Затемняющий градиент на стыке картинки и текста */
+.image-side::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 20px 0 60px rgba(0,0,0,0.15);
+}
+
+/* ХОВЕР ЭФФЕКТЫ */
+.glass-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 50px 100px rgba(0,0,0,0.15);
+    border-color: var(--gold);
+}
+
+.glass-card:hover .image-side {
+    transform: scale(1.05);
+}
+
+/* --- МАЛЕНЬКИЕ ЛИСТИКИ (СТИЛИ) --- */
+.leaf {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 2px 15px;
+    z-index: 1001;
+}
+
+/* --- ДЕКОРАТИВНЫЕ СОЛНЕЧНЫЕ БЛИКИ НА ФОНЕ --- */
+.sun-flare {
+    position: fixed;
+    top: 25%;
+    left: 5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,200,0.2) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+    filter: blur(80px);
+}
