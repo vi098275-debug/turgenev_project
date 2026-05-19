@@ -1,4 +1,3 @@
-/* --- ПЕРЕМЕННЫЕ И ОСНОВА --- */
 :root {
     --text-color: #2c342e;
     --dark-green: #3a4d39;
@@ -16,7 +15,6 @@ body {
     padding: 0;
     font-family: 'Lora', serif;
     background-color: var(--paper-bg);
-    /* Текстура папируса + мягкий радиальный свет */
     background-image: 
         radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.05) 100%),
         url('https://i.pinimg.com/originals/9b/8d/4d/9b8d4d4394b876430de47c191ee2f7c8.jpg');
@@ -25,7 +23,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- АНИМИРОВАННЫЙ ТУМАН НА ФОНЕ --- */
 body::before {
     content: "";
     position: fixed;
@@ -45,12 +42,10 @@ body::before {
     to { transform: translateX(5%) translateY(5%); }
 }
 
-/* --- ШАПКА САЙТА (ХЕДЕР) --- */
 .main-header {
     position: relative;
     height: 100vh;
     width: 100%;
-    /* Твоя основная картинка леса с Яндекса */
     background: url('https://i.pinimg.com/originals/e9/74/eb/e974ebb594996130e014f4952aae7ac0.jpg?nii=t') center/cover no-repeat fixed;
     display: flex;
     align-items: center;
@@ -58,7 +53,6 @@ body::before {
     z-index: 2;
 }
 
-/* Бесшовный переход (Туманный градиент) */
 .main-header::after {
     content: "";
     position: absolute;
@@ -105,11 +99,10 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- НАВИГАЦИЯ (СТЕКЛЯННАЯ КАПСУЛА) --- */
 .navbar {
     position: sticky;
     top: 20px;
-    margin: -50px auto 60px; /* Наплыв на хедер */
+    margin: -50px auto 60px; 
     width: fit-content;
     padding: 12px 45px;
     background: rgba(255, 255, 255, 0.6);
@@ -138,7 +131,6 @@ body::before {
     transform: translateY(-3px);
 }
 
-/* --- КОНТЕНТНЫЕ ПЛАЖКИ (ОБЪЕМНОЕ СТЕКЛО) --- */
 .content {
     max-width: 1100px;
     margin: 0 auto 100px;
@@ -147,7 +139,6 @@ body::before {
     z-index: 10;
 }
 
-/* Базовое состояние для анимации самопоявления */
 .glass-card {
     display: flex;
     background: rgba(255, 255, 255, 0.4);
@@ -162,7 +153,6 @@ body::before {
         0 10px 30px rgba(0, 0, 0, 0.05),
         0 40px 80px rgba(0, 0, 0, 0.1);
     
-    /* Анимация появления */
     opacity: 0;
     transform: translateY(100px) scale(0.9);
     filter: blur(10px);
@@ -179,7 +169,6 @@ body::before {
     flex-direction: row-reverse;
 }
 
-/* ТЕКСТОВАЯ СТОРОНА С ГЛУБИНОЙ */
 .text-side {
     flex: 1.2;
     padding: 80px;
@@ -218,7 +207,6 @@ body::before {
     opacity: 0.95;
 }
 
-/* ВИЗУАЛЬНАЯ СТОРОНА (КАРТИНКИ) */
 .image-side {
     flex: 1;
     background-size: cover;
@@ -228,7 +216,6 @@ body::before {
     transition: transform 0.8s ease;
 }
 
-/* Затемняющий градиент на стыке картинки и текста */
 .image-side::after {
     content: "";
     position: absolute;
@@ -239,7 +226,6 @@ body::before {
     box-shadow: inset 20px 0 60px rgba(0,0,0,0.15);
 }
 
-/* ХОВЕР ЭФФЕКТЫ */
 .glass-card:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.55);
@@ -251,7 +237,6 @@ body::before {
     transform: scale(1.05);
 }
 
-/* --- МАЛЕНЬКИЕ ЛИСТИКИ (СТИЛИ) --- */
 .leaf {
     position: fixed;
     pointer-events: none;
@@ -259,7 +244,6 @@ body::before {
     z-index: 1001;
 }
 
-/* --- ДЕКОРАТИВНЫЕ СОЛНЕЧНЫЕ БЛИКИ НА ФОНЕ --- */
 .sun-flare {
     position: fixed;
     top: 25%;
