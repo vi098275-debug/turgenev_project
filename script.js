@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // --- Эффект листопада (оставляем, он крутой) ---
+
     const leafContainer = document.createElement('div');
     leafContainer.style.position = 'fixed';
     leafContainer.style.top = '0';
@@ -40,26 +40,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(createLeaf, 600);
 
-    // --- МАГИЯ САМОПОЯВЛЕНИЯ ПЛАЖЕК ---
     const observerOptions = {
-        threshold: 0.15, // Плажка начнет появляться, когда 15% её площади будет видно
-        rootMargin: "0px 0px -50px 0px" // Небольшой запас снизу экрана
+        threshold: 0.15, 
+        rootMargin: "0px 0px -50px 0px" 
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('reveal');
-                // Если хочешь, чтобы она появлялась только один раз, раскомментируй строку ниже:
-                // observer.unobserve(entry.target); 
+                
             } else {
-                // Если хочешь, чтобы плажка снова исчезала, когда ты уходишь выше/ниже:
+                
                 entry.target.classList.remove('reveal');
             }
         });
     }, observerOptions);
 
-    // Цепляем наблюдателя на все наши карточки
     const cards = document.querySelectorAll('.glass-card');
     cards.forEach(card => {
         observer.observe(card);
